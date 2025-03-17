@@ -82,6 +82,13 @@ Logs training and validation metrics to Wandb for real-time monitoring.
 Tracks experiments and visualizes results.
 
 ## Assignment Report 
-https://wandb.ai/mangleshpatidar2233-iit-madras-alumni-association/fashion-mnist/reports/DA6401-Assignment-1---VmlldzoxMTcwOTY1NA
+https://api.wandb.ai/links/mangleshpatidar2233-iit-madras-alumni-association/jvbzvh9i
 
-## For Q1,Q2, Q7  I have provided separate code so please checkout on my github repo 
+##For some Question separte link in my github repo also mention in my Report
+Github Repo link:  https://github.com/manglesh001/DL-assigment1/tree/main
+
+Question 1: https://github.com/manglesh001/DL-assigment1/blob/main/DL_Ass1_Q1.ipynb
+Question 2: https://github.com/manglesh001/DL-assigment1/blob/main/DL_Ass1_Q2.ipynb
+Question 3&4:  https://github.com/manglesh001/DL-assigment1/blob/main/DL_Ass1_Q3_Q4.ipynb
+Question 7: https://github.com/manglesh001/DL-assigment1/blob/main/DL_ASS1_Q7.ipynb
+Question 8: https://github.com/manglesh001/DL-assigment1/blob/main/DL_Ass1_Q8.ipynb
