@@ -79,5 +79,7 @@ Logs validation loss and accuracy to Wandb.
 Logs training and validation metrics to Wandb for real-time monitoring.
 Tracks experiments and visualizes results.
 
+## Assignment Report 
+https://wandb.ai/mangleshpatidar2233-iit-madras-alumni-association/fashion-mnist/reports/DA6401-Assignment-1---VmlldzoxMTcwOTY1NA
 
 ## For Q1,Q2, Q7  I have provided separate code so please checkout on my github repo 
