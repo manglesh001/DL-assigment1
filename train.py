@@ -6,6 +6,32 @@ import wandb
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.metrics import confusion_matrix
 
+
+# Load dataset MNIST or Fashion_MNIST
+def load_dataset(dataset_name):
+    if dataset_name == "mnist":
+        (X_train, y_train), (X_test, y_test) = mnist.load_data()
+    elif dataset_name == "fashion_mnist":
+        (X_train, y_train), (X_test, y_test) = fashion_mnist.load_data()
+    else:
+        raise ValueError("Invalid dataset name. Choose 'mnist' or 'fashion_mnist'.")
+
+    # Normalize and reshape data
+    X_train = X_train.reshape(X_train.shape[0], -1) / 255.0
+    X_test = X_test.reshape(X_test.shape[0], -1) / 255.0
+
+    # One-hot encode labels for train and test data
+    y_train = np.eye(10)[y_train]
+    y_test = np.eye(10)[y_test]
+    # print(X_train)
+    # print(y_train)
+    # print(X_test)
+    # print(y_test)
+
+
+
+    return (X_train, y_train), (X_test, y_test)
+
 # Activation functions and derivatives
 def identity(x):
     return x
@@ -41,6 +67,8 @@ def initialize_weights(layers, method="xavier"):
         else:  # random
             weights.append(np.random.randn(layers[i], layers[i+1]) * 0.01)
         biases.append(np.zeros((1, layers[i+1])))
+    # print(weights)
+    # print(biases)
     return weights, biases
 
 ## Q1 
@@ -126,11 +154,13 @@ def backpropagation(y, activations, zs, weights, activation, loss_type="cross_en
         gradients_b[i] = np.sum(delta, axis=0, keepdims=True)
 
         error = np.dot(delta, weights[i].T)
+    # print(gradients_w)
+    # print(gradients_b)
 
     return gradients_w, gradients_b
 
 
-# # Class FFNN
+# # Class FFNN  Q2 implemented class of Feed forward neural Network
 # class FFNN:
 #     def __init__(self, layer_sizes, learning_rate=0.01):
 #         self.layer_sizes = layer_sizes
@@ -299,40 +329,23 @@ def sgd(weights, biases, gradients_w, gradients_b, lr, weight_decay=0.0):
     for i in range(len(weights)):
         weights[i] -= lr * (gradients_w[i] + weight_decay * weights[i])
         biases[i] -= lr * gradients_b[i]
+    
     return weights, biases
 
 
 ## NAdam optimizer
 
-# def nadam(weights, biases, gradients_w, gradients_b, lr, m, v, beta1=0.9, beta2=0.999, epsilon=1e-8, t=1, weight_decay=0.0):
-#     for i in range(len(weights)):
-#         m[i] = beta1 * m[i] + (1 - beta1) * gradients_w[i]
-#         v[i] = beta2 * v[i] + (1 - beta2) * (gradients_w[i] ** 2)
-#         m_hat = (beta1 * m[i] + (1 - beta1) * gradients_w[i]) / (1 - beta1 ** t)
-#         v_hat = v[i] / (1 - beta2 ** t)
-#         weights[i] -= lr * (m_hat / (np.sqrt(v_hat) + epsilon) + weight_decay * weights[i])
-#         biases[i] -= lr * gradients_b[i] / (np.sqrt(v_hat) + epsilon)
-#     return weights, biases, m, v
+def nadam(weights, biases, gradients_w, gradients_b, lr, m, v, beta1=0.9, beta2=0.999, epsilon=1e-8, t=1, weight_decay=0.0):
+    for i in range(len(weights)):
+        m[i] = beta1 * m[i] + (1 - beta1) * gradients_w[i]
+        v[i] = beta2 * v[i] + (1 - beta2) * (gradients_w[i] ** 2)
+        m_hat = (beta1 * m[i] + (1 - beta1) * gradients_w[i]) / (1 - beta1 ** t)
+        v_hat = v[i] / (1 - beta2 ** t)
+        weights[i] -= lr * (m_hat / (np.sqrt(v_hat) + epsilon) + weight_decay * weights[i])
+        biases[i] -= lr * gradients_b[i] / (np.sqrt(v_hat) + epsilon)
+    return weights, biases, m, v
 
 
-# Load dataset MNIST or Fashion_MNIST
-def load_dataset(dataset_name):
-    if dataset_name == "mnist":
-        (X_train, y_train), (X_test, y_test) = mnist.load_data()
-    elif dataset_name == "fashion_mnist":
-        (X_train, y_train), (X_test, y_test) = fashion_mnist.load_data()
-    else:
-        raise ValueError("Invalid dataset name. Choose 'mnist' or 'fashion_mnist'.")
-
-    # Normalize and reshape data
-    X_train = X_train.reshape(X_train.shape[0], -1) / 255.0
-    X_test = X_test.reshape(X_test.shape[0], -1) / 255.0
-
-    # One-hot encode labels for train and test data
-    y_train = np.eye(10)[y_train]
-    y_test = np.eye(10)[y_test]
-
-    return (X_train, y_train), (X_test, y_test)
 
 # Train the network 
 def train_network(X_train, y_train, X_val, y_val, config):
@@ -384,7 +397,8 @@ def train_network(X_train, y_train, X_val, y_val, config):
 
             # Backpropagation
             gradients_w, gradients_b = backpropagation(y_batch, activations, zs, weights, activation, config.loss)
-
+            # print(gradients_w)
+            # print(gradients_b)
             # Update weights and biases based on optimizer
             if optimizer == "sgd":
                 weights, biases = sgd(weights, biases, gradients_w, gradients_b, lr, config.weight_decay)
@@ -451,6 +465,22 @@ def main():
     parser.add_argument("-sz", "--hidden_size", type=int, default=64)
     parser.add_argument("-a", "--activation", type=str, default="sigmoid", choices=["identity", "sigmoid", "tanh", "relu"])
     args = parser.parse_args()
+    # print(args.dataset)
+    # print(args.epochs)
+    # print(args.batch_size)
+    # print(args.optimizer)
+    # print(args.loss)
+    # print(args.learning_rate)
+    # print(args.momentum)
+    # print(args.beta)
+    # print(args.beta1)
+    # print(args.beta2)
+    # print(args.epsilon)
+    # print(args.weight_decay)
+    # print(args.weight_init)
+    # print(args.num_layers)
+    # print(args.hidden_size)
+    # print(args.activation)
 
     # Initialize wandb 
     wandb.init(project=args.wandb_project, entity=args.wandb_entity, config=args)
@@ -458,7 +488,7 @@ def main():
     # Load dataset
     (X_train, y_train), (X_test, y_test) = load_dataset(args.dataset)
 
-    # Split training data into train and validation
+    # Split training data into train and validation 
     X_train, X_val = X_train[:54000], X_train[54000:]
     y_train, y_val = y_train[:54000], y_train[54000:]
 
