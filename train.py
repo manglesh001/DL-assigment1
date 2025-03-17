@@ -79,6 +79,8 @@ def fashion_mnist_image():
     plt.show()
 
 
+
+
 # Forward Propagation
 def forward_propagation(X, weights, biases, activation):
     activations = [X]
@@ -126,6 +128,93 @@ def backpropagation(y, activations, zs, weights, activation, loss_type="cross_en
         error = np.dot(delta, weights[i].T)
 
     return gradients_w, gradients_b
+
+
+# # Class FFNN
+# class FFNN:
+#     def __init__(self, layer_sizes, learning_rate=0.01):
+#         self.layer_sizes = layer_sizes
+#         self.learning_rate = learning_rate
+#         self.weights = []
+#         self.biases = []
+
+#     # Initialize weights and biases
+#         for i in range(len(layer_sizes) - 1):
+#             self.weights.append(np.random.randn(layer_sizes[i], layer_sizes[i + 1]) * 0.01)
+#             self.biases.append(np.zeros((1, layer_sizes[i + 1])))
+
+#   #softmax  activation function ouput layer
+#     def softmax(self, x):
+#         exp_x = np.exp(x - np.max(x, axis=1, keepdims=True))
+#         return exp_x / np.sum(exp_x, axis=1, keepdims=True)
+
+#   #Sigmoid activation function hidden layer
+#     def sigmoid(self, x):
+#         return 1 / (1 + np.exp(-x))
+
+#     def sigmoid_derivative(self, x):
+#         return x * (1 - x)
+
+
+#   #forward Pass FFNN
+#     def forward(self, x):
+#         self.activations = [x]
+#         self.z_values = []
+#         for i in range(len(self.weights)):
+#             z = np.dot(self.activations[-1], self.weights[i]) + self.biases[i]
+#             self.z_values.append(z)
+#             if i == len(self.weights) - 1:
+#                 # Output layer uses softmax
+#                 activation = self.softmax(z)
+#             else:
+#                 # Hidden layers use sigmoid
+#                 activation = self.sigmoid(z)
+#             self.activations.append(activation)
+#       # Return the output probabilities
+#         return self.activations[-1]
+
+#     #Backward Pass FFNN
+
+#     def backward(self, x, y):
+#         m = x.shape[0]
+#         self.deltas = [None] * len(self.weights)
+
+#         # Output layer error
+#         output_error = self.activations[-1] - y
+#         self.deltas[-1] = output_error
+
+#         # Backpropagate errors
+#         for i in range(len(self.weights) - 2, -1, -1):
+#             error = np.dot(self.deltas[i + 1], self.weights[i + 1].T)
+#             self.deltas[i] = error * self.sigmoid_derivative(self.activations[i + 1])
+
+#         # Update weights and biases
+#         for i in range(len(self.weights)):
+#             self.weights[i] -= self.learning_rate * np.dot(self.activations[i].T, self.deltas[i]) / m
+#             self.biases[i] -= self.learning_rate * np.sum(self.deltas[i], axis=0, keepdims=True) / m
+
+#     def train(self, x, y, epochs=10, batch_size=32):
+#         for epoch in range(epochs):
+#             for i in range(0, x.shape[0], batch_size):
+#                 x_batch = x[i:i + batch_size]
+#                 y_batch = y[i:i + batch_size]
+
+#                 # Forward pass
+#                 self.forward(x_batch)
+
+#                 # Backward pass
+#                 self.backward(x_batch, y_batch)
+
+#             # Print loss at  every epoch
+#             predictions = self.forward(x)
+#             loss = -np.mean(y * np.log(predictions + 1e-10))
+#             print(f"Epoch {epoch + 1}/{epochs}, Loss: {loss:.4f}")
+
+# # Return the softmax probabilities for the input
+
+#     def predict_probabilities(self, x):
+#         return self.forward(x)
+
 
 #  RMSPROP Optimizers
 
