@@ -4,6 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import wandb
 from sklearn.preprocessing import OneHotEncoder
+from sklearn.metrics import confusion_matrix
 
 # Activation functions and derivatives
 def identity(x):
@@ -41,6 +42,42 @@ def initialize_weights(layers, method="xavier"):
             weights.append(np.random.randn(layers[i], layers[i+1]) * 0.01)
         biases.append(np.zeros((1, layers[i+1])))
     return weights, biases
+
+## Q1 
+def fashion_mnist_image():
+    wandb.init(project="fashion-mnist", name="fashion-mnist-images")
+
+    # Load the Fashion-MNIST dataset
+    (x_train, y_train), (x_test, y_test) = fashion_mnist.load_data()
+
+    # Class names for Fashion-MNIST
+    class_names = ['T-shirt/top', 'Trouser', 'Pullover', 'Dress', 'Coat',
+                   'Sandal', 'Shirt', 'Sneaker', 'Bag', 'Ankle boot']
+
+    # Create a figure to plot the images
+    plt.figure(figsize=(10, 15))
+    plt.suptitle("Fashion-MNIST DataSet", fontsize=16)
+
+    # Plot one sample image for each class
+    for i in range(len(class_names)):
+        # Find the first occurrence of each class in the training data
+        idx = np.where(y_train == i)[0][0]
+
+        # Plot the image
+        plt.subplot(5, 5, i + 1)
+        plt.imshow(x_train[idx], cmap='gray')
+        plt.title(class_names[i])
+        plt.axis('off')
+
+    # Adjust layout and display the plot
+    plt.tight_layout()
+
+    # Log the plot to Wandb
+    wandb.log({"Fashion-MNIST Images": wandb.Image(plt)})
+
+    # Show the plot
+    plt.show()
+
 
 # Forward Propagation
 def forward_propagation(X, weights, biases, activation):
@@ -126,6 +163,35 @@ def adam(weights, biases, gradients_w, gradients_b, lr, m_w, v_w, m_b, v_b, beta
     return weights, biases, m_w, v_w, m_b, v_b
 
 
+
+def log_conf_mat(y_true, y_pred, class_names, wandb_project="fashion-mnist", wandb_run_name="confusion-matrix"):
+
+    wandb.init(project=wandb_project, name=wandb_run_name)
+
+    # Generate confusion matrix
+    cm = confusion_matrix(y_true, y_pred)
+
+    # Plot confusion matrix
+    plt.figure(figsize=(12, 10))
+    sns.heatmap(cm, annot=True, fmt='d', cmap='viridis', xticklabels=class_names, yticklabels=class_names)
+    plt.title('Confusion Matrix for Fashion-MNIST Test Set', fontsize=16)
+    plt.xlabel('Predicted Labels', fontsize=14)
+    plt.ylabel('True Labels', fontsize=14)
+    plt.xticks(rotation=45)
+    plt.yticks(rotation=0)
+
+    # Save the confusion matrix plot to a file
+    confusion_matrix_path = "confusion_matrix.png"
+    plt.savefig(confusion_matrix_path)
+    plt.close()
+
+    # Log the confusion matrix as an image to Wandb
+    wandb.log({"confusion_matrix": wandb.Image(confusion_matrix_path)})
+
+
+# Example usage
+#class_names = ['T-shirt/top', 'Trouser', 'Pullover', 'Dress', 'Coat, 'Sandal', 'Shirt', 'Sneaker', 'Bag', 'Ankle boot']
+
 ## Nestrov Optimizer
 def nesterov(weights, biases, gradients_w, gradients_b, lr, velocity, beta=0.9, weight_decay=0.0):
     for i in range(len(weights)):
@@ -134,6 +200,8 @@ def nesterov(weights, biases, gradients_w, gradients_b, lr, velocity, beta=0.9, 
         biases[i] -= lr * gradients_b[i]
         velocity[i] = temp_velocity + (1 - beta) * gradients_w[i]
     return weights, biases, velocity
+
+
 
  ## SGD optimizer
 
