@@ -77,3 +77,5 @@ Logs validation loss and accuracy to Wandb.
 Logs training and validation metrics to Wandb for real-time monitoring.
 Tracks experiments and visualizes results.
 
+
+## For Q1,Q2, Q7  I have provided separate code so please checkout on my github repo 
