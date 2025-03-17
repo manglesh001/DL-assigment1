@@ -90,6 +90,6 @@ Github Repo link:  https://github.com/manglesh001/DL-assigment1/tree/main
 Question 1: https://github.com/manglesh001/DL-assigment1/blob/main/DL_Ass1_Q1.ipynb
 Question 2: https://github.com/manglesh001/DL-assigment1/blob/main/DL_Ass1_Q2.ipynb
 Question 3&4:  https://github.com/manglesh001/DL-assigment1/blob/main/DL_Ass1_Q3_Q4.ipynb
-Question 7: https://github.com/manglesh001/DL-assigment1/blob/main/DL_ASSi1_Q7.ipynb
+Question 7: https://github.com/manglesh001/DL-assigment1/blob/main/DL_Assi1_Q7.ipynb
 Question 8: https://github.com/manglesh001/DL-assigment1/blob/main/DL_Ass1_Q8.ipynb
 Question 10:  https://github.com/manglesh001/DL-assigment1/blob/main/DL_Ass1_Q10.ipynb
