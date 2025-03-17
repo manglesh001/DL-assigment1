@@ -71,7 +71,9 @@ Logs validation loss and accuracy to Wandb.
 <br>
 
 ## Example: 
+'''
 !python train.py -wp fashion_mnist -we mangleshpatidar2233-iit-madras-alumni-association -d fashion_mnist -e 5 -lr 0.1 -b 4 -l mean_squared_error -o adam -beta1 0.4 -beta2 0.6 -eps 0.00001 -w_i xavier -w_d .1 -a tanh
+'''
 
 ## Wandb Integration:
 Logs training and validation metrics to Wandb for real-time monitoring.
