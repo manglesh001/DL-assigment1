@@ -81,6 +81,39 @@ Logs validation loss and accuracy to Wandb.
 Logs training and validation metrics to Wandb for real-time monitoring.
 Tracks experiments and visualizes results.
 
+## VS Code AI Agents Setup
+
+🤖 **NEW**: This repository now includes VS Code configuration for AI coding assistance!
+
+For local development with AI agents (GitHub Copilot, TabNine, etc.), see the detailed setup guide:
+**[VS Code AI Setup Guide](./VSCODE_AI_SETUP.md)**
+
+### Quick Start for Local Development:
+
+1. **Clone and open in VS Code:**
+```bash
+git clone https://github.com/manglesh001/DL-assigment1.git
+cd DL-assigment1
+code dl-assignment.code-workspace
+```
+
+2. **Install recommended extensions when prompted**
+3. **Set up Python environment:**
+```bash
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+pip install -r requirements.txt
+```
+
+4. **Enable GitHub Copilot or other AI coding assistants**
+
+The workspace includes:
+- Pre-configured AI-friendly settings
+- Debug configurations for training scripts
+- Jupyter notebook support
+- Automated tasks for common operations
+- Recommended extensions for AI assistance
+
 ## Assignment Report 
 https://api.wandb.ai/links/mangleshpatidar2233-iit-madras-alumni-association/vhhvkfhg
 

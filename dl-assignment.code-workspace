@@ -1,0 +1,48 @@
+{
+    "folders": [
+        {
+            "name": "DL Assignment 1",
+            "path": "."
+        }
+    ],
+    "settings": {
+        "python.defaultInterpreterPath": "./venv/bin/python",
+        "jupyter.defaultKernel": "Python 3 (ipykernel)",
+        "workbench.editor.enablePreview": false,
+        "explorer.confirmDelete": false,
+        "explorer.confirmDragAndDrop": false,
+        "files.autoSave": "afterDelay",
+        "files.autoSaveDelay": 1000,
+        "editor.suggest.snippetsPreventQuickSuggestions": false,
+        "github.copilot.enable": {
+            "*": true,
+            "yaml": false,
+            "plaintext": false,
+            "markdown": true,
+            "python": true,
+            "jupyter": true
+        }
+    },
+    "extensions": {
+        "recommendations": [
+            "github.copilot",
+            "github.copilot-chat",
+            "ms-python.python",
+            "ms-toolsai.jupyter",
+            "ms-python.vscode-pylance"
+        ]
+    },
+    "launch": {
+        "version": "0.2.0",
+        "configurations": [
+            {
+                "name": "Train DL Model",
+                "type": "python",
+                "request": "launch",
+                "program": "${workspaceFolder}/train.py",
+                "console": "integratedTerminal",
+                "cwd": "${workspaceFolder}"
+            }
+        ]
+    }
+}

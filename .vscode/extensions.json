@@ -1,0 +1,28 @@
+{
+    "recommendations": [
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "ms-toolsai.jupyter",
+        "ms-toolsai.jupyter-keymap",
+        "ms-toolsai.jupyter-renderers",
+        "ms-python.flake8",
+        "ms-python.black-formatter",
+        "ms-python.isort",
+        "github.copilot",
+        "github.copilot-chat",
+        "github.copilot-labs",
+        "ms-vscode.vscode-github-issue-notebooks",
+        "eamodio.gitlens",
+        "ms-vscode-remote.remote-containers",
+        "ms-vscode-remote.remote-ssh",
+        "ms-vscode-remote.remote-wsl",
+        "visualstudioexptteam.vscodeintellicode",
+        "ms-python.debugpy",
+        "charliermarsh.ruff",
+        "ms-python.mypy-type-checker",
+        "tabnine.tabnine-vscode",
+        "ms-vscode.cpptools-extension-pack",
+        "redhat.vscode-yaml",
+        "ms-vscode.vscode-json"
+    ]
+}
